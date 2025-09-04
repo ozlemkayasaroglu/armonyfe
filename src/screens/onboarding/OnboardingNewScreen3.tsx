@@ -80,7 +80,7 @@ export default function OnboardingNewScreen2() {
         <View style={styles.content}>
           {/* Ana görsel - Description Module */}
           <View style={styles.mainImageContainer}>
-            <View style={styles.circularFrame}>
+            <View>
               <Image
                 source={require("../../../assets/images/image25.png")}
                 style={styles.musicianImage}
@@ -193,29 +193,15 @@ const styles = StyleSheet.create({
     fontWeight: "300",
   },
   mainImageContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
+    position: "absolute",
+    marginTop: 200,
   },
-  circularFrame: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    overflow: "hidden",
-    borderWidth: 2,
-    borderColor: "rgba(93, 211, 211, 0.3)",
-    shadowColor: "#5dd3d3",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 10,
-  },
+
   musicianImage: {
-    width: "100%",
-    height: "100%",
+    width: 183,
+    height: 183,
   },
   textContainer: {
     alignItems: "center",
@@ -240,6 +226,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 20,
     letterSpacing: 0,
+    marginTop: -10,
   },
   pagination: {
     position: "absolute",
@@ -249,6 +236,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 30,
   },
   dot: {
     width: 8,

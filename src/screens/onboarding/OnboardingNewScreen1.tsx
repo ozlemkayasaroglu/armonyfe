@@ -59,7 +59,7 @@ export default function OnboardingNewScreen1() {
           <View style={styles.content}>
             {/* Ana görsel - Description Module */}
             <View style={styles.mainImageContainer}>
-              <View style={styles.circularFrame}>
+              <View>
                 <Image
                   source={require("../../../assets/images/image23.png")}
                   style={styles.descriptionImage}
@@ -108,16 +108,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   waveImage: {
-    marginTop: 140,
+    marginTop: 180,
     width: width * 0.82,
     height: width * 4,
   },
   content: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    paddingTop: 80,
-    paddingBottom: 400,
+    paddingTop: 150,
     zIndex: 10,
   },
   logoContainer: {
@@ -140,9 +139,9 @@ const styles = StyleSheet.create({
     fontWeight: "300",
   },
   mainImageContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
+    marginTop: 30,
   },
   circularFrame: {
     width: 200,
@@ -161,12 +160,12 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   descriptionImage: {
-    width: "100%",
-    height: "100%",
+    width: 183,
+    height: 183,
   },
   textContainer: {
     alignItems: "center",
-    marginTop: 14,
+    marginTop: 4,
     marginBottom: 20,
   },
   allContainer: {

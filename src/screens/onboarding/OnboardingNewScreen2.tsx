@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../src/navigation/AppNavigator";
@@ -18,7 +17,7 @@ type OnboardingScreen2NavigationProp = StackNavigationProp<
   "Onboarding2"
 >;
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 export default function OnboardingNewScreen2() {
   const navigation = useNavigation<OnboardingScreen2NavigationProp>();
@@ -34,9 +33,9 @@ export default function OnboardingNewScreen2() {
       activeOpacity={1}
     >
       <StatusBar style="light" />
-      {/* Koyu mor gradient arka plan */}
+      {/* Koyu mor arka plan */}
       <View style={styles.background}>
-        {/* Logo üstte */}
+        {/* Logo */}
         <View style={styles.logoContainer}>
           <Image
             source={require("../../../assets/images/Logo.png")}
@@ -44,50 +43,43 @@ export default function OnboardingNewScreen2() {
             resizeMode="contain"
           />
         </View>
-        <View style={styles.allContainer}>
-          <View style={styles.waveContainer}>
-            {/* Wave 1 - En altta */}
-            <Image
-              source={require("../../../assets/images/Wave1.png")}
-              style={[styles.wave1]}
-              resizeMode="contain"
-            />
-
-            {/* Wave 2 - Ortada */}
-            <Image
-              source={require("../../../assets/images/Wave2.png")}
-              style={[styles.waveImage, styles.wave2]}
-              resizeMode="contain"
-            />
-          </View>
+        {/* Wave görselleri */}
+        <View style={styles.waveContainer}>
+          <Image
+            source={require("../../../assets/images/Wave1.png")}
+            style={styles.wave1}
+            resizeMode="contain"
+          />
+          <Image
+            source={require("../../../assets/images/Wave2.png")}
+            style={[styles.waveImage, styles.wave2]}
+            resizeMode="contain"
+          />
         </View>
-
-        {/* İçerik */}
+        {/* Ana içerik */}
         <View style={styles.content}>
-          {/* Ana görsel - Description Module */}
           <View style={styles.mainImageContainer}>
-            <View style={styles.circularFrame}>
+            <View>
               <Image
                 source={require("../../../assets/images/image24.png")}
                 style={styles.musicianImage}
                 resizeMode="cover"
               />
             </View>
-
-            {/* Başlık */}
             <View style={styles.textContainer}>
-              <Text style={styles.title}>Müzisyen ve{"\n"}müzik grupları</Text>
+              <Text style={styles.title}>
+                Müzik eğitimleri ve{"\n"}etkinlik hizmetleri
+              </Text>
             </View>
           </View>
         </View>
-
         {/* Sayfa İndikatörü */}
         <View style={styles.pagination}>
           <View style={styles.dot} />
           <View style={[styles.dot, styles.activeDot]} />
           <View style={styles.dot} />
         </View>
-      </View>{" "}
+      </View>
     </TouchableOpacity>
   );
 }
@@ -102,22 +94,29 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  content: {
-    flex: 1,
-    justifyContent: "space-between",
+  logoContainer: {
     alignItems: "center",
-    paddingTop: 80,
-    paddingBottom: 400,
-    zIndex: 10,
+    justifyContent: "flex-start",
+    position: "absolute",
+    top: 60,
+    left: 0,
+    right: 0,
+    zIndex: 20,
+  },
+  logoImage: {
+    width: 91,
+    height: 73,
+    alignSelf: "center",
   },
   waveContainer: {
     position: "absolute",
-    top: 150,
+    top: -150,
     left: 0,
     right: 0,
     bottom: 0,
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 5,
   },
   waveImage: {
     position: "absolute",
@@ -125,74 +124,35 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   wave1: {
-    width: width * 0.83,
+    width: width * 0.84,
     height: width * 2,
   },
   wave2: {
-    width: width * 0.9,
-    height: width * 2,
+    width: width * 0.89,
+    height: width * 1,
   },
-
-  logoContainer: {
+  content: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "flex-start",
-    zIndex: 20,
-    position: "absolute",
-    top: 60,
-    left: 0,
-    right: 0,
-  },
-  logoImage: {
-    width: 91,
-    height: 73,
-    alignSelf: "center",
-  },
-  logoText: {
-    color: "#5dd3d3",
-    fontSize: 16,
-    fontWeight: "300",
+    zIndex: 10,
   },
   mainImageContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
+    position: "absolute",
+    marginTop: -130,
   },
-  circularFrame: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    overflow: "hidden",
-    borderWidth: 2,
-    borderColor: "rgba(93, 211, 211, 0.3)",
-    shadowColor: "#5dd3d3",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 10,
-  },
+
   musicianImage: {
-    width: "100%",
-    height: "100%",
+    width: 183,
+    height: 183,
   },
   textContainer: {
     alignItems: "center",
-    marginTop: 14,
+    marginTop: 4,
     marginBottom: 20,
   },
-
-  allContainer: {
-    position: "absolute",
-    top: -300,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
   title: {
     fontSize: 14,
     fontWeight: "400",
@@ -209,6 +169,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 30,
   },
   dot: {
     width: 8,
