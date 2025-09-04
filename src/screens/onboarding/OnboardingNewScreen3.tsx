@@ -27,7 +27,7 @@ export default function OnboardingNewScreen2() {
     navigation.navigate("Onboarding3");
   };
   const handleLogin = () => {
-    console.log("Giriş Yap tıklandı");
+    navigation.navigate("SignUp1");
   };
 
   const handleHomepage = () => {
