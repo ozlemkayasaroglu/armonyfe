@@ -37,6 +37,12 @@ const EyeOffIcon = (props: React.ComponentProps<typeof Svg>) => (
   </Svg>
 );
 
+const HomeIcon = (props: React.ComponentProps<typeof Svg>) => (
+  <Svg width={32} height={32} viewBox="0 0 24 24" fill="none" {...props}>
+    <Path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#fff" />
+  </Svg>
+);
+
 // Navigation prop'unu alacak şekilde güncellendi
 import { NavigationProp } from "@react-navigation/native";
 
@@ -87,11 +93,7 @@ export default function SignIn({
           />
           <View style={styles.bannerOverlay} />
           <TouchableOpacity style={styles.homeIconContainer}>
-            <Image
-              source={require("../../../assets/svg/Vector.svg")}
-              style={styles.homeIcon}
-              resizeMode="contain"
-            />
+            <HomeIcon />
           </TouchableOpacity>
           <View style={styles.bannerTextContainer}>
             <Text style={styles.bannerText}>
@@ -304,11 +306,10 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.2)",
     borderRadius: 20,
     padding: 6,
-  },
-  homeIcon: {
     width: 32,
     height: 32,
-    paddingLeft: 16,
+    alignItems: "center",
+    justifyContent: "center",
   },
   bannerTextContainer: {
     position: "absolute",
