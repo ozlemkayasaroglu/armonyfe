@@ -27,7 +27,7 @@ export default function OnboardingNewScreen2() {
     navigation.navigate("Onboarding3");
   };
   const handleLogin = () => {
-    navigation.navigate("SignUp1");
+    navigation.navigate("SignUp");
   };
 
   const handleHomepage = () => {
