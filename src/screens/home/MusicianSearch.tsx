@@ -74,12 +74,12 @@ const SendIcon = () => (
 // Instrument icons
 import TalentIcon from "../../../assets/images/talent-icon.png";
 
-export default function BandSearch() {
+export default function MusicianSearch() {
   return (
     <View style={styles.container}>
       {/* Üst başlık barı */}
       <View style={styles.headerBar}>
-        <Text style={styles.headerTitle}>Müzik Grubu Arıyorum</Text>
+        <Text style={styles.headerTitle}>Müzisyen Arıyorum</Text>
         <TouchableOpacity style={styles.headerClose}>
           <CloseIcon />
         </TouchableOpacity>
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#181F4B",
   },
   headerBar: {
-    backgroundColor: "#FF6B8A",
+    backgroundColor: "#F27A7A",
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     paddingTop: 32,

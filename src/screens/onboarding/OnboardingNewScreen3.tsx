@@ -31,7 +31,7 @@ export default function OnboardingNewScreen2() {
   };
 
   const handleHomepage = () => {
-    console.log("Anasayfa tıklandı");
+    navigation.navigate("HomePage"); // Replace "SignIn" with the correct route name from your RootStackParamList if needed
   };
 
   return (

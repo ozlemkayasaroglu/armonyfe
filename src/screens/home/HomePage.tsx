@@ -10,13 +10,14 @@ import {
   SafeAreaView,
 } from "react-native";
 import Svg, { Path } from "react-native-svg";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { RootStackParamList } from "../../navigation/AppNavigator";
 
 const { width } = Dimensions.get("window");
 
 // Logo PNG
 const Logo = () => (
   <Image
-    // Logo dosya yolunu buraya ekleyin
     source={require("../../../assets/images/logotype.png")}
     style={{ width: 89.2, height: 23, marginBottom: -10 }}
   />
@@ -48,6 +49,7 @@ const cards = [
     section: "Çaldığım Enstrümanlar",
     tags: ["Elektro Gitar", "Bas Gitar"],
     color: "#FF6B8A",
+    targetScreen: "BandSearch",
   },
   {
     type: "Müzisyen Arıyorum",
@@ -57,6 +59,7 @@ const cards = [
     section: "Aradığım Müzisyenler",
     tags: ["Elektro Gitar", "Akustik Gitar"],
     color: "#FF6B8A",
+    targetScreen: "MusicianSearch",
   },
   {
     type: "Müzik Eğitimi",
@@ -66,6 +69,7 @@ const cards = [
     section: "Verilen Eğitimler",
     tags: ["Müzik Prodüktörlüğü", "Mixing", "Mastering"],
     color: "#1DE9B6",
+    targetScreen: "MusicEducation",
   },
   {
     type: "Sektörel Hizmet",
@@ -75,6 +79,7 @@ const cards = [
     section: "Verilen Hizmetler",
     tags: ["Müzik Prodüktörlüğü", "Mixing"],
     color: "#B388FF",
+    targetScreen: "SectoralService",
   },
   {
     type: "Etkinlik Hizmeti",
@@ -84,10 +89,13 @@ const cards = [
     section: "Verilen Hizmetler",
     tags: ["Trio Grup", "Bando", "Müzik Grubu"],
     color: "#00B0FF",
+    targetScreen: "EventService",
   },
 ];
 
 export default function HomePage() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -130,7 +138,13 @@ export default function HomePage() {
       {/* Cards */}
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         {cards.map((card, i) => (
-          <View key={i} style={[styles.card, { borderTopColor: card.color }]}>
+          <TouchableOpacity
+            key={i}
+            onPress={() => {
+              navigation.navigate(card.targetScreen);
+            }}
+            style={[styles.card, { borderTopColor: card.color }]}
+          >
             <View style={styles.cardHeader}>
               <Image source={card.image} style={styles.cardImage} />
               <View style={{ flex: 1, marginLeft: 12 }}>
@@ -159,7 +173,7 @@ export default function HomePage() {
                 </View>
               ))}
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
         <View style={{ height: 80 }} />
       </ScrollView>
