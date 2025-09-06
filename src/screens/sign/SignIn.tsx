@@ -15,20 +15,9 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Path } from "react-native-svg";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
 const { width } = Dimensions.get("window");
-
-// Mock SVG components for eye and eye-off icons
-const EyeIcon = (props: React.ComponentProps<typeof Svg>) => (
-  <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" {...props}>
-    <Path
-      d="M12 4.5C7 4.5 2.73 7.61 0 12c2.73 4.39 7 7.5 12 7.5s9.27-3.11 12-7.5c-2.73-4.39-7-7.5-12-7.5zm0 13c-3.03 0-5.5-2.47-5.5-5.5S8.97 6.5 12 6.5s5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5zm0-9.5c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"
-      fill="#B6B6B6"
-    />
-  </Svg>
-);
-
-import type { StackNavigationProp } from "@react-navigation/stack";
 
 type RootStackParamList = {
   SignIn: undefined;
@@ -45,12 +34,32 @@ interface SignInProps {
   navigation: SignInScreenNavigationProp;
 }
 
+// Mock SVG components for eye and home icons
+const EyeIcon = (props: React.ComponentProps<typeof Svg>) => (
+  <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" {...props}>
+    <Path
+      d="M12 4.5C7 4.5 2.73 7.61 0 12c2.73 4.39 7 7.5 12 7.5s9.27-3.11 12-7.5c-2.73-4.39-7-7.5-12-7.5zm0 13c-3.03 0-5.5-2.47-5.5-5.5S8.97 6.5 12 6.5s5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5zm0-9.5c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"
+      fill="#B6B6B6"
+    />
+  </Svg>
+);
+
+const HomeIcon = (props: React.ComponentProps<typeof Svg>) => (
+  <Svg width={32} height={32} viewBox="0 0 24 24" fill="none" {...props}>
+    <Path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#fff" />
+  </Svg>
+);
+
 export default function SignIn({ navigation }: SignInProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotError, setForgotError] = useState("");
+  const [forgotSuccess, setForgotSuccess] = useState(false);
 
   const isFormValid = email && password.length >= 6;
 
@@ -60,6 +69,31 @@ export default function SignIn({ navigation }: SignInProps) {
 
   const handleSignUpNavigation = () => {
     navigation.navigate("SignUp");
+  };
+
+  // Şifremi Unuttum panelini aç
+  const handleForgotPasswordOpen = () => {
+    setShowForgotPassword(true);
+    setForgotEmail("");
+    setForgotError("");
+    setForgotSuccess(false);
+  };
+  // Paneli kapat
+  const handleForgotPasswordClose = () => {
+    setShowForgotPassword(false);
+    setForgotEmail("");
+    setForgotError("");
+    setForgotSuccess(false);
+  };
+  // Onayla butonu
+  const handleForgotPasswordSubmit = () => {
+    if (!forgotEmail || !forgotEmail.includes("@")) {
+      setForgotError("Lütfen geçerli bir e-posta girin.");
+      return;
+    }
+    setForgotError("");
+    setForgotSuccess(true);
+    // Burada API isteği yapılabilir
   };
 
   return (
@@ -85,11 +119,7 @@ export default function SignIn({ navigation }: SignInProps) {
           />
           <View style={styles.bannerOverlay} />
           <TouchableOpacity style={styles.homeIconContainer}>
-            <Image
-              source={require("../../../assets/svg/Vector.svg")}
-              style={styles.homeIcon}
-              resizeMode="contain"
-            />
+            <HomeIcon />
           </TouchableOpacity>
           <View style={styles.bannerTextContainer}>
             <Text style={styles.bannerText}>
@@ -202,7 +232,12 @@ export default function SignIn({ navigation }: SignInProps) {
           <Text
             style={{ alignSelf: "flex-end", marginTop: -16, marginBottom: 16 }}
           >
-            <Text style={styles.forgotPasswordText}>Şifremi Unuttum</Text>
+            <Text
+              style={styles.forgotPasswordText}
+              onPress={handleForgotPasswordOpen}
+            >
+              Şifremi Unuttum
+            </Text>
           </Text>
 
           <Text style={styles.termsText}>
@@ -245,7 +280,49 @@ export default function SignIn({ navigation }: SignInProps) {
             <Text style={styles.loginText}>Üye Ol</Text>
           </TouchableOpacity>
         </View>
-        {/* Close the ScrollView here */}
+        {/* Şifremi Unuttum Paneli */}
+        {showForgotPassword && (
+          <View style={styles.forgotModalOverlay}>
+            <TouchableOpacity
+              style={{ flex: 1 }}
+              activeOpacity={1}
+              onPress={handleForgotPasswordClose}
+            />
+            <View style={styles.forgotModalContainer}>
+              <View style={{ alignItems: "center", marginBottom: 12 }}>
+                <View style={styles.forgotModalBar} />
+              </View>
+              <Text style={styles.forgotModalTitle}>Şifremi Unuttum</Text>
+              <Text style={styles.forgotModalDesc}>
+                Lütfen e-posta adresinizi girin.
+              </Text>
+
+              <TextInput
+                style={styles.forgotModalInput}
+                placeholder="E-posta"
+                placeholderTextColor="#B6B6B6"
+                value={forgotEmail}
+                onChangeText={setForgotEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+              {forgotError ? (
+                <Text style={styles.forgotModalError}>{forgotError}</Text>
+              ) : null}
+              {forgotSuccess ? (
+                <Text style={styles.forgotModalSuccess}>
+                  E-posta gönderildi!
+                </Text>
+              ) : null}
+              <TouchableOpacity
+                style={styles.forgotModalButton}
+                onPress={handleForgotPasswordSubmit}
+              >
+                <Text style={styles.forgotModalButtonText}>Onayla</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -280,11 +357,10 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.2)",
     borderRadius: 20,
     padding: 6,
-  },
-  homeIcon: {
-    width: 32,
-    height: 32,
-    paddingLeft: 16,
+    width: 32, // Added for the new SVG size
+    height: 32, // Added for the new SVG size
+    alignItems: "center", // Center the icon
+    justifyContent: "center", // Center the icon
   },
   bannerTextContainer: {
     position: "absolute",
@@ -385,5 +461,90 @@ const styles = StyleSheet.create({
     fontSize: 10,
     lineHeight: 12,
     color: "#B6B6B6",
+  },
+  forgotModalOverlay: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+    justifyContent: "flex-end",
+    zIndex: 100,
+  },
+  forgotModalContainer: {
+    backgroundColor: "#0E012A",
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+    paddingHorizontal: 24,
+    paddingTop: 24,
+    paddingBottom: 32,
+    minHeight: 365,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  forgotModalBar: {
+    width: 40,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: "#fff",
+    opacity: 0.2,
+    marginBottom: 8,
+  },
+  forgotModalTitle: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "700",
+    marginBottom: 8,
+  },
+  forgotModalDesc: {
+    color: "#B6B6B6",
+    fontSize: 14,
+    marginBottom: 18,
+  },
+  forgotModalLabel: {
+    color: "#fff",
+    fontSize: 13,
+    marginBottom: 4,
+    marginTop: 8,
+  },
+  forgotModalInput: {
+    backgroundColor: "#12002F",
+    color: "#fff",
+    borderRadius: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    fontSize: 15,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderBottomColor: "#2D1A5A",
+  },
+  forgotModalButton: {
+    backgroundColor: "#7B61FF",
+    borderRadius: 8,
+    height: 48,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 12,
+  },
+  forgotModalButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  forgotModalError: {
+    color: "#FF6B6B",
+    fontSize: 13,
+    marginBottom: 4,
+    marginTop: 2,
+  },
+  forgotModalSuccess: {
+    color: "#7BFFB2",
+    fontSize: 13,
+    marginBottom: 4,
+    marginTop: 2,
   },
 });
