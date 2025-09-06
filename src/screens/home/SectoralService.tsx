@@ -74,12 +74,12 @@ const SendIcon = () => (
 // Instrument icons
 import TalentIcon from "../../../assets/images/talent-icon.png";
 
-export default function EventService() {
+export default function SectoralService() {
   return (
     <View style={styles.container}>
       {/* Üst başlık barı */}
       <View style={styles.headerBar}>
-        <Text style={styles.headerTitle}>Etkinlik</Text>
+        <Text style={styles.headerTitle}>Sektörel Hizmet</Text>
         <TouchableOpacity style={styles.headerClose}>
           <CloseIcon />
         </TouchableOpacity>
@@ -114,16 +114,17 @@ export default function EventService() {
         </View>
         {/* Açıklama */}
         <Text style={styles.description}>
-          Geniş müzik arşivim ve profesyonel ekipmanlarımla, düğünlerden doğum
-          günlerine, kurumsal etkinliklerden özel partilere kadar her türlü
-          organizasyonunuzda unutulmaz bir müzik deneyimi yaşatıyorum.
+          Demo kayıtlarınızı daha profesyonel bir hale getirebilirim.
         </Text>
         {/* Müzik Tarzı */}
         <Text style={styles.sectionTitle}>Verdiğim Hizmetler</Text>
         <View style={styles.underline} />
         <View style={styles.tagRow}>
           <View style={styles.tag}>
-            <Text style={styles.tagText}>DJ</Text>
+            <Text style={styles.tagText}>Müzik Prodüktörlüğü</Text>
+          </View>
+          <View style={styles.tag}>
+            <Text style={styles.tagText}>Mixing</Text>
           </View>
         </View>
       </ScrollView>
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#181F4B",
   },
   headerBar: {
-    backgroundColor: "#00B0FF",
+    backgroundColor: "#B388FF",
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     paddingTop: 32,
@@ -226,7 +227,7 @@ const styles = StyleSheet.create({
   },
   tag: {
     borderWidth: 1.5,
-    borderColor: "#00B0FF",
+    borderColor: "#B388FF",
     borderRadius: 8,
     paddingHorizontal: 14,
     paddingVertical: 4,
