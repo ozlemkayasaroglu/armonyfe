@@ -13,8 +13,8 @@ import HomePage from "../screens/home/HomePage";
 // Yeni ekranları buraya import edin
 import BandSearch from "../screens/home/BandSearch";
 import MusicianSearch from "../screens/home/MusicianSearch";
-// import MusicEducationPage from "../screens/home/MusicEducation";
-// import SectoralServicePage from "../screens/home/SectoralService";
+// import MusicEducation from "../screens/home/MusicEducation";
+import SectoralService from "../screens/home/SectoralService";
 import EventService from "../screens/home/EventService";
 
 export type RootStackParamList = {
@@ -28,7 +28,7 @@ export type RootStackParamList = {
   BandSearch: undefined;
   MusicianSearch: undefined; // Yeni ekran
   // MusicEducation: undefined; // Yeni ekran
-  // SectoralService: undefined; // Yeni ekran
+  SectoralService: undefined; // Yeni ekran
   EventService: undefined; // Yeni ekran
 };
 
@@ -54,8 +54,10 @@ export default function AppNavigator() {
         {/* Yeni ekranları buraya ekledik */}
         <Stack.Screen name="BandSearch" component={BandSearch} />
         <Stack.Screen name="MusicianSearch" component={MusicianSearch} />
-        {/* <Stack.Screen name="MusicEducation" component={MusicEducation} />
-        <Stack.Screen name="SectoralService" component={SectoralService} />*/}
+        {/* <Stack.Screen name="MusicEducation" component={MusicEducation} />*/}
+
+        <Stack.Screen name="SectoralService" component={SectoralService} />
+
         <Stack.Screen name="EventService" component={EventService} />
       </Stack.Navigator>
     </NavigationContainer>
