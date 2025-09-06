@@ -2,7 +2,6 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-// Onboarding Screens
 import SplashScreen from "../screens/onboarding/SplashScreen";
 import OnboardingNewScreen1 from "../screens/onboarding/OnboardingNewScreen1";
 import OnboardingNewScreen2 from "../screens/onboarding/OnboardingNewScreen2";
@@ -10,10 +9,9 @@ import OnboardingNewScreen3 from "../screens/onboarding/OnboardingNewScreen3";
 import SignUp from "../screens/sign/SignUp";
 import SignIn from "../screens/sign/SignIn";
 import HomePage from "../screens/home/HomePage";
-// Yeni ekranları buraya import edin
 import BandSearch from "../screens/home/BandSearch";
 import MusicianSearch from "../screens/home/MusicianSearch";
-// import MusicEducation from "../screens/home/MusicEducation";
+import MusicEducation from "../screens/home/MusicEducation";
 import SectoralService from "../screens/home/SectoralService";
 import EventService from "../screens/home/EventService";
 
@@ -27,7 +25,7 @@ export type RootStackParamList = {
   HomePage: undefined;
   BandSearch: undefined;
   MusicianSearch: undefined; // Yeni ekran
-  // MusicEducation: undefined; // Yeni ekran
+  MusicEducation: undefined; // Yeni ekran
   SectoralService: undefined; // Yeni ekran
   EventService: undefined; // Yeni ekran
 };
@@ -51,13 +49,10 @@ export default function AppNavigator() {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="HomePage" component={HomePage} />
-        {/* Yeni ekranları buraya ekledik */}
         <Stack.Screen name="BandSearch" component={BandSearch} />
         <Stack.Screen name="MusicianSearch" component={MusicianSearch} />
-        {/* <Stack.Screen name="MusicEducation" component={MusicEducation} />*/}
-
+        <Stack.Screen name="MusicEducation" component={MusicEducation} />
         <Stack.Screen name="SectoralService" component={SectoralService} />
-
         <Stack.Screen name="EventService" component={EventService} />
       </Stack.Navigator>
     </NavigationContainer>
